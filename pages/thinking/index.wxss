@@ -1,0 +1,152 @@
+/* pages/thinking/index.wxss */
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #f5f7fa;
+}
+
+/* 对话区域 */
+.chat-container {
+  flex: 1;
+  padding: 30rpx;
+  overflow-y: auto;
+}
+
+.message-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+/* 消息气泡 */
+.message {
+  display: flex;
+  flex-direction: column;
+  max-width: 80%;
+}
+
+.message.user {
+  align-self: flex-end;
+}
+
+.message.ai {
+  align-self: flex-start;
+}
+
+.bubble {
+  padding: 20rpx 30rpx;
+  border-radius: 20rpx;
+  font-size: 28rpx;
+  line-height: 1.5;
+  position: relative;
+  animation: fadeIn 0.3s ease-in;
+}
+
+.user .bubble {
+  background: #2196f3;
+  color: #fff;
+  border-bottom-right-radius: 4rpx;
+}
+
+.ai .bubble {
+  background: #fff;
+  color: #333;
+  border-bottom-left-radius: 4rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+}
+
+.time {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 8rpx;
+  margin-left: 10rpx;
+}
+
+/* 输入区域 */
+.input-container {
+  padding: 20rpx 30rpx;
+  background: #fff;
+  border-top: 1rpx solid #e8eaed;
+  display: flex;
+  gap: 20rpx;
+  align-items: center;
+}
+
+.input-container.disabled {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.input-box {
+  flex: 1;
+  height: 80rpx;
+  background: #f5f7fa;
+  border-radius: 40rpx;
+  padding: 0 30rpx;
+  font-size: 28rpx;
+}
+
+.send-btn {
+  width: 120rpx;
+  height: 80rpx;
+  background: #2196f3;
+  color: #fff;
+  border-radius: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  padding: 0;
+}
+
+.send-btn[disabled] {
+  background: #ccc;
+}
+
+/* 加载状态 */
+.loading-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.loading-spinner {
+  width: 60rpx;
+  height: 60rpx;
+  border: 4rpx solid #f3f3f3;
+  border-top: 4rpx solid #2196f3;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20rpx;
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #666;
+}
+
+/* 动画 */
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(10rpx); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

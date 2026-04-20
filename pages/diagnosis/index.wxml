@@ -1,0 +1,62 @@
+<view class="container">
+  <view class="header">
+    <text class="title">智诊舱</text>
+    <text class="subtitle">错题解析与归因</text>
+  </view>
+
+  <view class="upload-section">
+    <view class="upload-box" bindtap="chooseImage">
+      <image wx:if="{{imagePath}}" src="{{imagePath}}" mode="aspectFit" class="preview-image"></image>
+      <view wx:else class="upload-placeholder">
+        <text class="upload-icon">+</text>
+        <text class="upload-text">点击上传错题图片</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="diagnosis-section" wx:if="{{diagnosisResult}}">
+    <view class="section-title">诊断结果</view>
+    <view class="diagnosis-content">
+      <view class="error-type">
+        <text class="label">错误类型：</text>
+        <text class="value">{{diagnosisResult.errorType}}</text>
+      </view>
+      <view class="error-reason">
+        <text class="label">错误原因：</text>
+        <text class="value">{{diagnosisResult.errorReason}}</text>
+      </view>
+      <view class="improvement-suggestion">
+        <text class="label">改进建议：</text>
+        <text class="value">{{diagnosisResult.improvementSuggestion}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="solution-section" wx:if="{{solution}}">
+    <view class="section-title">正确解答</view>
+    <view class="solution-content">
+      <view class="solution-steps">
+        <text class="label">解答步骤：</text>
+        <view class="steps-list">
+          <view class="step-item" wx:for="{{solution.steps}}" wx:key="index">
+            <text class="step-number">{{index + 1}}.</text>
+            <text class="step-content">{{item}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="solution-result">
+        <text class="label">最终答案：</text>
+        <text class="value">{{solution.finalAnswer}}</text>
+      </view>
+      <view class="solution-tips">
+        <text class="label">解题技巧：</text>
+        <text class="value">{{solution.tips}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="loading" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">正在分析中...</text>
+  </view>
+</view> 

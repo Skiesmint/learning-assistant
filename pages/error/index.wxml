@@ -1,0 +1,106 @@
+<!--pages/error/index.wxml-->
+<view class="container">
+  <!-- 头部 -->
+  <view class="header">
+    <view class="title">错题熔炉</view>
+    <view class="subtitle">强化训练工坊</view>
+  </view>
+
+  <!-- 错题重铸 -->
+  <view class="forge-section">
+    <view class="section-title">错题重铸</view>
+    <view class="forge-content">
+      <view class="original-question">
+        <view class="question-title">原题</view>
+        <view class="question-content">{{originalQuestion}}</view>
+        <view class="error-analysis">
+          <view class="analysis-title">错误分析</view>
+          <view class="analysis-content">{{errorAnalysis}}</view>
+        </view>
+      </view>
+      
+      <view class="transformed-questions">
+        <view class="transform-title">变形题</view>
+        <view class="transform-list">
+          <view class="transform-item" wx:for="{{transformedQuestions}}" wx:key="id">
+            <view class="transform-type">{{item.type}}</view>
+            <view class="transform-content">{{item.content}}</view>
+            <view class="transform-actions">
+              <button class="action-btn solve" bindtap="solveQuestion" data-id="{{item.id}}">解题</button>
+              <button class="action-btn hint" bindtap="showHint" data-id="{{item.id}}">提示</button>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 抗干扰训练 -->
+  <view class="interference-section">
+    <view class="section-title">抗干扰训练</view>
+    <view class="interference-content">
+      <view class="training-question">
+        <view class="question-content">{{interferenceQuestion}}</view>
+        <view class="options-list">
+          <view class="option-item {{item.selected ? 'selected' : ''}} {{item.isCorrect ? 'correct' : ''}} {{item.isWrong ? 'wrong' : ''}}"
+                wx:for="{{interferenceOptions}}" 
+                wx:key="id"
+                bindtap="selectOption"
+                data-id="{{item.id}}">
+            <text class="option-label">{{item.label}}</text>
+            <text class="option-content">{{item.content}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="training-feedback" wx:if="{{showFeedback}}">
+        <view class="feedback-content">{{feedbackContent}}</view>
+        <view class="feedback-actions">
+          <button class="action-btn next" bindtap="nextQuestion">下一题</button>
+          <button class="action-btn review" bindtap="reviewQuestion">复习</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 错题实验 -->
+  <view class="experiment-section">
+    <view class="section-title">错题实验</view>
+    <view class="experiment-content">
+      <view class="solution-comparison">
+        <view class="solution-card wrong">
+          <view class="card-title">错误解法</view>
+          <view class="solution-steps">
+            <view class="step-item" wx:for="{{wrongSolution}}" wx:key="index">
+              <view class="step-number">{{index + 1}}</view>
+              <view class="step-content">{{item}}</view>
+            </view>
+          </view>
+        </view>
+        <view class="solution-card correct">
+          <view class="card-title">正确解法</view>
+          <view class="solution-steps">
+            <view class="step-item" wx:for="{{correctSolution}}" wx:key="index">
+              <view class="step-number">{{index + 1}}</view>
+              <view class="step-content">{{item}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="experiment-analysis">
+        <view class="analysis-title">解法对比分析</view>
+        <view class="analysis-points">
+          <view class="point-item" wx:for="{{analysisPoints}}" wx:key="index">
+            <view class="point-icon">{{item.icon}}</view>
+            <view class="point-content">{{item.content}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading" wx:if="{{loading}}">
+    <view class="loading-icon"></view>
+    <view class="loading-text">加载中...</view>
+  </view>
+</view>

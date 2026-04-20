@@ -1,0 +1,106 @@
+<!--pages/progress/index.wxml-->
+<view class="container">
+  <!-- 头部 -->
+  <view class="header">
+    <view class="title">量变舱</view>
+    <view class="subtitle">追踪你的学习进步</view>
+  </view>
+
+  <!-- 能力曲线 -->
+  <view class="curve-section">
+    <view class="section-title">能力曲线</view>
+    <view class="curve-container">
+      <canvas canvas-id="abilityCurve" class="ability-curve"></canvas>
+      <view class="curve-legend">
+        <view class="legend-item">
+          <view class="legend-color speed"></view>
+          <text>解题速度</text>
+        </view>
+        <view class="legend-item">
+          <view class="legend-color path"></view>
+          <text>路径优化度</text>
+        </view>
+        <view class="legend-item">
+          <view class="legend-color accuracy"></view>
+          <text>正确率</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 成就系统 -->
+  <view class="achievement-section">
+    <view class="section-title">成就系统</view>
+    <view class="achievement-list">
+      <view class="achievement-card {{item.unlocked ? 'unlocked' : ''}}" 
+            wx:for="{{achievements}}" 
+            wx:key="id">
+        <view class="achievement-icon">
+          {{item.unlocked ? '🏆' : '🔒'}}
+        </view>
+        <view class="achievement-content">
+          <view class="achievement-title">{{item.title}}</view>
+          <view class="achievement-desc">{{item.description}}</view>
+          <view class="achievement-progress" wx:if="{{!item.unlocked}}">
+            <progress percent="{{item.progress}}" 
+                      stroke-width="4" 
+                      color="#2196F3" 
+                      backgroundColor="#E3F2FD"/>
+            <text class="progress-text">{{item.progress}}%</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 复习日历 -->
+  <view class="calendar-section">
+    <view class="section-title">复习日历</view>
+    <view class="calendar-container">
+      <view class="calendar-header">
+        <view class="month-selector">
+          <text class="month-btn" bindtap="prevMonth">◀</text>
+          <text class="current-month">{{currentYear}}年{{currentMonth}}月</text>
+          <text class="month-btn" bindtap="nextMonth">▶</text>
+        </view>
+      </view>
+      <view class="calendar-grid">
+        <view class="weekday-header">
+          <text wx:for="{{weekdays}}" wx:key="*this">{{item}}</text>
+        </view>
+        <view class="days-grid">
+          <view class="day-cell {{item.isCurrentMonth ? '' : 'other-month'}} {{item.hasPlan ? 'has-plan' : ''}} {{item.isToday ? 'today' : ''}}"
+                wx:for="{{calendarDays}}" 
+                wx:key="date"
+                bindtap="selectDate"
+                data-date="{{item.date}}">
+            <text class="day-number">{{item.day}}</text>
+            <view class="plan-indicator" wx:if="{{item.hasPlan}}"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 当日计划 -->
+    <view class="daily-plan" wx:if="{{selectedDatePlan}}">
+      <view class="plan-title">当日计划</view>
+      <view class="plan-list">
+        <view class="plan-item" wx:for="{{selectedDatePlan}}" wx:key="id">
+          <view class="plan-time">{{item.time}}</view>
+          <view class="plan-content">
+            <view class="plan-name">{{item.name}}</view>
+            <view class="plan-desc">{{item.description}}</view>
+          </view>
+          <view class="plan-status {{item.completed ? 'completed' : ''}}">
+            {{item.completed ? '已完成' : '待完成'}}
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading" wx:if="{{loading}}">
+    <view class="loading-icon"></view>
+    <view class="loading-text">加载中...</view>
+  </view>
+</view>

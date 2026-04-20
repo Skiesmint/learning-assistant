@@ -1,0 +1,151 @@
+<!--pages/knowledge/index.wxml-->
+<view class="container">
+  <!-- 头部 -->
+  <view class="header">
+    <view class="title">进化图谱</view>
+    <view class="subtitle">追踪你的知识进化历程</view>
+  </view>
+
+  <!-- 知识图谱区域 -->
+  <view class="graph-section">
+    <canvas canvas-id="knowledgeGraph" 
+            class="knowledge-graph"
+            bindtap="handleNodeTap"
+            bindtouchstart="handleTouchStart"
+            bindtouchmove="handleTouchMove"
+            bindtouchend="handleTouchEnd">
+    </canvas>
+    <view class="graph-controls">
+      <view class="control-btn" bindtap="handleScale" data-scale="1.2">放大</view>
+      <view class="control-btn" bindtap="handleScale" data-scale="0.8">缩小</view>
+      <view class="control-btn" bindtap="resetView">重置</view>
+    </view>
+    <view class="graph-legend">
+      <view class="legend-item">
+        <view class="legend-color mastered"></view>
+        <text>已掌握</text>
+      </view>
+      <view class="legend-item">
+        <view class="legend-color learning"></view>
+        <text>学习中</text>
+      </view>
+      <view class="legend-item">
+        <view class="legend-color weak"></view>
+        <text>薄弱</text>
+      </view>
+      <view class="legend-item">
+        <view class="legend-color forgetting"></view>
+        <text>待复习</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 知识补丁包 -->
+  <view class="patch-section">
+    <view class="section-title">知识补丁包</view>
+    <view class="patch-list">
+      <view class="patch-card" wx:for="{{knowledgePatches}}" wx:key="id">
+        <view class="patch-header">
+          <view class="patch-title">{{item.title}}</view>
+          <view class="patch-status {{item.status}}">
+            {{item.status === 'new' ? '新知识' : item.status === 'reviewing' ? '复习中' : '已完成'}}
+          </view>
+        </view>
+        <view class="concept-explain">{{item.concept}}</view>
+        <view class="practice-list">
+          <view class="practice-item" wx:for="{{item.practices}}" wx:key="id" wx:for-item="practice">
+            <view class="practice-header">
+              <view class="practice-title">{{practice.title}}</view>
+              <view class="practice-difficulty {{item.status}}">{{item.status === 'new' ? '入门' : item.status === 'reviewing' ? '巩固' : '提升'}}</view>
+            </view>
+            <view class="practice-content">{{practice.content}}</view>
+            
+            <!-- 练习进度 -->
+            <view class="practice-progress" wx:if="{{practiceProgress[item.id + '_' + practice.id]}}">
+              <view class="progress-info">
+                <text>尝试次数：{{practiceProgress[item.id + '_' + practice.id].attempts}}</text>
+                <text>状态：{{practiceProgress[item.id + '_' + practice.id].isCorrect ? '已完成' : '未完成'}}</text>
+              </view>
+            </view>
+
+            <!-- 练习区域 -->
+            <view class="practice-area" wx:if="{{currentPractice && currentPractice.id === practice.id}}">
+              <input class="answer-input" 
+                     placeholder="请输入你的答案" 
+                     value="{{showAnswer ? practice.answer : ''}}"
+                     disabled="{{showAnswer}}"
+                     bindinput="onAnswerInput"/>
+              <view class="practice-actions">
+                <button class="action-btn" 
+                        bindtap="submitAnswer">提交答案</button>
+                <button class="action-btn" 
+                        bindtap="viewAnswer">查看答案</button>
+              </view>
+            </view>
+
+            <!-- 练习按钮 -->
+            <view class="practice-actions" wx:else>
+              <button class="action-btn" 
+                      data-patch-id="{{item.id}}" 
+                      data-practice-id="{{practice.id}}"
+                      bindtap="startPractice">开始练习</button>
+              <button class="action-btn" 
+                      data-patch-id="{{item.id}}" 
+                      data-practice-id="{{practice.id}}"
+                      bindtap="viewAnswer">查看答案</button>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 遗忘预警 -->
+  <view class="forget-section">
+    <view class="section-title">遗忘预警</view>
+    <view class="forget-list">
+      <view class="forget-item" wx:for="{{forgetPredictions}}" wx:key="id">
+        <view class="forget-icon">⚠️</view>
+        <view class="forget-content">
+          <view class="forget-title">{{item.title}}</view>
+          <view class="forget-desc">{{item.desc}}</view>
+          <view class="forget-details">
+            <text>记忆保持率：{{item.retention}}%</text>
+            <text>上次复习：{{item.lastReview}}</text>
+            <text>间隔天数：{{item.daysSinceReview}}天</text>
+          </view>
+        </view>
+        <button class="forget-action {{item.retention < 50 ? 'urgent' : ''}}" 
+                data-prediction-id="{{item.id}}"
+                bindtap="reviewForgotten">立即复习</button>
+      </view>
+    </view>
+    
+    <!-- 复习提醒 -->
+    <view class="reminder-section" wx:if="{{reviewReminders.length > 0}}">
+      <view class="section-title">复习提醒</view>
+      <view class="reminder-list">
+        <view class="reminder-item {{item.priority}}" 
+              wx:for="{{reviewReminders}}" 
+              wx:key="id">
+          <view class="reminder-icon">
+            {{item.priority === 'high' ? '🔴' : item.priority === 'medium' ? '🟡' : '🟢'}}
+          </view>
+          <view class="reminder-content">
+            <view class="reminder-title">{{item.title}}</view>
+            <view class="reminder-time">建议复习时间：{{item.reviewTime}}</view>
+          </view>
+          <button class="reminder-action" 
+                  data-prediction-id="{{item.id}}"
+                  bindtap="reviewForgotten">复习</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading" wx:if="{{loading}}">
+    <view class="loading-icon"></view>
+    <view class="loading-text">加载中...</view>
+  </view>
+</view>

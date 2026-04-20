@@ -1,0 +1,90 @@
+<!--pages/error/solve/index.wxml-->
+<view class="container">
+  <!-- 头部 -->
+  <view class="header">
+    <view class="title">解题过程</view>
+    <view class="subtitle">请写下你的解题步骤</view>
+  </view>
+
+  <!-- 题目信息 -->
+  <view class="question-section">
+    <view class="question-title">题目</view>
+    <view class="question-content">{{question.content}}</view>
+    <view class="question-type">题型：{{question.type}}</view>
+  </view>
+
+  <!-- 手写板 -->
+  <view class="board-section">
+    <view class="board-header">
+      <view class="board-title">解题步骤</view>
+      <view class="board-actions">
+        <button class="action-btn clear" bindtap="clearBoard">清空</button>
+        <button class="action-btn undo" bindtap="undoStep">撤销</button>
+      </view>
+    </view>
+    <canvas canvas-id="solveBoard" 
+            class="solve-board"
+            bindtouchstart="touchStart"
+            bindtouchmove="touchMove"
+            bindtouchend="touchEnd">
+    </canvas>
+  </view>
+
+  <!-- 参考答案 -->
+  <view class="answer-section">
+    <view class="section-header">
+      <view class="section-title">参考答案</view>
+      <view class="toggle-btn {{showAnswer ? 'active' : ''}}" 
+            bindtap="toggleAnswer">
+        {{showAnswer ? '收起' : '展开'}}
+      </view>
+    </view>
+    <view class="answer-content" wx:if="{{showAnswer}}">
+      <view class="answer-steps">
+        <view class="step-item" wx:for="{{answer.steps}}" wx:key="index">
+          <view class="step-number">{{index + 1}}</view>
+          <view class="step-content">{{item}}</view>
+        </view>
+      </view>
+      <view class="answer-result">
+        <view class="result-label">最终答案：</view>
+        <view class="result-content">{{answer.result}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 解析 -->
+  <view class="analysis-section">
+    <view class="section-header">
+      <view class="section-title">详细解析</view>
+      <view class="toggle-btn {{showAnalysis ? 'active' : ''}}" 
+            bindtap="toggleAnalysis">
+        {{showAnalysis ? '收起' : '展开'}}
+      </view>
+    </view>
+    <view class="analysis-content" wx:if="{{showAnalysis}}">
+      <view class="analysis-points">
+        <view class="point-item" wx:for="{{analysis.points}}" wx:key="index">
+          <view class="point-icon">{{item.icon}}</view>
+          <view class="point-content">{{item.content}}</view>
+        </view>
+      </view>
+      <view class="analysis-tips">
+        <view class="tips-title">解题技巧</view>
+        <view class="tips-content">{{analysis.tips}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <button class="action-btn save" bindtap="saveSolution">保存</button>
+    <button class="action-btn submit" bindtap="submitSolution">提交</button>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading" wx:if="{{loading}}">
+    <view class="loading-icon"></view>
+    <view class="loading-text">加载中...</view>
+  </view>
+</view> 

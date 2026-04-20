@@ -1,0 +1,49 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/diagnosis/index",
+    "pages/thinking/index",
+    "pages/knowledge/index",
+    "pages/progress/index",
+    "pages/error/index",
+    "pages/error/solve/index",
+    "pages/error/review/index",
+    "pages/error/detail/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "智引Study",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#07c160",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/diagnosis/index",
+        "text": "智诊舱"
+      },
+      {
+        "pagePath": "pages/thinking/index",
+        "text": "思维道场"
+      },
+      {
+        "pagePath": "pages/knowledge/index",
+        "text": "进化图谱"
+      },
+      {
+        "pagePath": "pages/progress/index",
+        "text": "量变舱"
+      },
+      {
+        "pagePath": "pages/error/index",
+        "text": "错题熔炉"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

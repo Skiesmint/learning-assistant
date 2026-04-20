@@ -1,0 +1,139 @@
+<!--pages/error/review/index.wxml-->
+<view class="container">
+  <!-- 头部 -->
+  <view class="header">
+    <view class="title">错题复习</view>
+    <view class="subtitle">温故而知新</view>
+  </view>
+
+  <!-- 错题统计 -->
+  <view class="stats-section">
+    <view class="stats-grid">
+      <view class="stats-item">
+        <view class="stats-number">{{totalCount}}</view>
+        <view class="stats-label">错题总数</view>
+      </view>
+      <view class="stats-item">
+        <view class="stats-number">{{reviewedCount}}</view>
+        <view class="stats-label">已复习</view>
+      </view>
+      <view class="stats-item">
+        <view class="stats-number">{{masteredCount}}</view>
+        <view class="stats-label">已掌握</view>
+      </view>
+    </view>
+    <view class="progress-bar">
+      <view class="progress-inner" style="width: {{masteryRate}}%"></view>
+    </view>
+  </view>
+
+  <!-- 错题列表 -->
+  <view class="error-list">
+    <view class="list-header">
+      <view class="header-title">错题记录</view>
+      <view class="filter-btn" bindtap="showFilter">
+        <text>筛选</text>
+      </view>
+    </view>
+    
+    <view class="error-item" 
+          wx:for="{{errorList}}" 
+          wx:key="id"
+          bindtap="viewErrorDetail"
+          data-id="{{item.id}}">
+      <view class="item-header">
+        <view class="item-title">{{item.title}}</view>
+        <view class="item-status {{item.status}}">{{item.statusText}}</view>
+      </view>
+      <view class="item-content">
+        <view class="item-type">{{item.type}}</view>
+        <view class="item-date">记录于 {{item.date}}</view>
+      </view>
+      <view class="item-footer">
+        <view class="review-count">复习次数：{{item.reviewCount}}</view>
+        <view class="last-review">上次复习：{{item.lastReview}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 筛选弹窗 -->
+  <view class="filter-popup {{showFilterPopup ? 'show' : ''}}">
+    <view class="popup-mask" bindtap="hideFilter"></view>
+    <view class="popup-content">
+      <view class="popup-header">
+        <view class="popup-title">筛选条件</view>
+        <view class="close-btn" bindtap="hideFilter">×</view>
+      </view>
+      <view class="filter-options">
+        <view class="option-group">
+          <view class="option-title">状态</view>
+          <view class="option-list">
+            <view class="option-item {{filter.status === 'all' ? 'active' : ''}}"
+                  bindtap="setFilter"
+                  data-type="status"
+                  data-value="all">
+              全部
+            </view>
+            <view class="option-item {{filter.status === 'unreviewed' ? 'active' : ''}}"
+                  bindtap="setFilter"
+                  data-type="status"
+                  data-value="unreviewed">
+              未复习
+            </view>
+            <view class="option-item {{filter.status === 'reviewed' ? 'active' : ''}}"
+                  bindtap="setFilter"
+                  data-type="status"
+                  data-value="reviewed">
+              已复习
+            </view>
+            <view class="option-item {{filter.status === 'mastered' ? 'active' : ''}}"
+                  bindtap="setFilter"
+                  data-type="status"
+                  data-value="mastered">
+              已掌握
+            </view>
+          </view>
+        </view>
+        <view class="option-group">
+          <view class="option-title">题型</view>
+          <view class="option-list">
+            <view class="option-item {{filter.type === 'all' ? 'active' : ''}}"
+                  bindtap="setFilter"
+                  data-type="type"
+                  data-value="all">
+              全部
+            </view>
+            <view class="option-item {{filter.type === 'function' ? 'active' : ''}}"
+                  bindtap="setFilter"
+                  data-type="type"
+                  data-value="function">
+              函数
+            </view>
+            <view class="option-item {{filter.type === 'geometry' ? 'active' : ''}}"
+                  bindtap="setFilter"
+                  data-type="type"
+                  data-value="geometry">
+              几何
+            </view>
+            <view class="option-item {{filter.type === 'algebra' ? 'active' : ''}}"
+                  bindtap="setFilter"
+                  data-type="type"
+                  data-value="algebra">
+              代数
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="popup-footer">
+        <button class="reset-btn" bindtap="resetFilter">重置</button>
+        <button class="confirm-btn" bindtap="applyFilter">确定</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading" wx:if="{{loading}}">
+    <view class="loading-icon"></view>
+    <view class="loading-text">加载中...</view>
+  </view>
+</view> 

@@ -1,0 +1,343 @@
+.container {
+  padding: 40rpx;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 60rpx;
+}
+
+.title {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.subtitle {
+  font-size: 28rpx;
+  color: #666;
+  display: block;
+}
+
+.upload-section {
+  margin-bottom: 40rpx;
+}
+
+.upload-box {
+  width: 100%;
+  height: 400rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.upload-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #999;
+}
+
+.upload-icon {
+  font-size: 80rpx;
+  margin-bottom: 20rpx;
+}
+
+.upload-text {
+  font-size: 28rpx;
+}
+
+.diagnosis-section,
+.solution-section {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 40rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 2rpx solid #f0f0f0;
+}
+
+.diagnosis-content,
+.solution-content {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.label {
+  font-weight: bold;
+  color: #333;
+  margin-right: 10rpx;
+}
+
+.value {
+  color: #666;
+}
+
+.error-type,
+.error-reason,
+.improvement-suggestion,
+.solution-result,
+.solution-tips {
+  margin-bottom: 20rpx;
+}
+
+.solution-steps {
+  margin-bottom: 30rpx;
+}
+
+.steps-list {
+  margin-top: 20rpx;
+}
+
+.step-item {
+  display: flex;
+  margin-bottom: 16rpx;
+}
+
+.step-number {
+  color: #07c160;
+  font-weight: bold;
+  margin-right: 10rpx;
+}
+
+.step-content {
+  flex: 1;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40rpx;
+}
+
+.loading-spinner {
+  width: 60rpx;
+  height: 60rpx;
+  border: 6rpx solid #f3f3f3;
+  border-top: 6rpx solid #07c160;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20rpx;
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #999;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.result-section {
+  margin-top: 40rpx;
+}
+
+.result-card {
+  background: white;
+  border-radius: 12rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+.result-header {
+  margin-bottom: 20rpx;
+}
+
+.result-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.result-content {
+  margin-top: 20rpx;
+}
+
+.result-item {
+  margin-bottom: 16rpx;
+  display: flex;
+  align-items: center;
+}
+
+.chart-section {
+  background: white;
+  border-radius: 12rpx;
+  padding: 30rpx;
+  margin-top: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+.radar-chart {
+  width: 100%;
+  height: 600rpx;
+}
+
+/* 扫描区域样式 */
+.scan-section {
+  background-color: #fff;
+  border-radius: 12rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.scan-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.scan-box {
+  width: 100%;
+  height: 400rpx;
+  background-color: #f8f8f8;
+  border-radius: 8rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.camera-icon {
+  width: 80rpx;
+  height: 80rpx;
+  margin-bottom: 20rpx;
+}
+
+/* 诊断结果区域样式 */
+.diagnosis-card {
+  background-color: #f8f8f8;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  margin-bottom: 30rpx;
+}
+
+.diagnosis-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15rpx;
+}
+
+.diagnosis-item:last-child {
+  margin-bottom: 0;
+}
+
+.item-label {
+  color: #666;
+  font-size: 28rpx;
+}
+
+.item-value {
+  color: #333;
+  font-size: 28rpx;
+  font-weight: 500;
+}
+
+/* 知识图谱样式 */
+.knowledge-map {
+  margin: 30rpx 0;
+}
+
+.map-canvas {
+  width: 100%;
+  height: 400rpx;
+  background-color: #f8f8f8;
+  border-radius: 8rpx;
+}
+
+/* 薄弱点分析样式 */
+.weakness-analysis {
+  margin-top: 30rpx;
+}
+
+.radar-canvas {
+  width: 100%;
+  height: 400rpx;
+  background-color: #f8f8f8;
+  border-radius: 8rpx;
+}
+
+.weakness-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+
+.weakness-item {
+  flex: 1;
+  min-width: 300rpx;
+  background-color: #f8f8f8;
+  border-radius: 8rpx;
+  padding: 15rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.weakness-label {
+  color: #666;
+  font-size: 26rpx;
+}
+
+.weakness-value {
+  color: #07c160;
+  font-size: 26rpx;
+  font-weight: 500;
+}
+
+/* 加载状态样式 */
+.loading-section {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.loading-icon {
+  width: 60rpx;
+  height: 60rpx;
+  border: 4rpx solid #f3f3f3;
+  border-top: 4rpx solid #07c160;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20rpx;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+} 

@@ -1,0 +1,11 @@
+{
+  "name": "study-assistant",
+  "version": "1.0.0",
+  "description": "智引Study - 基于Deepseek的认知科学学习纠偏系统",
+  "scripts": {
+    "generate-icons": "node scripts/generate-icons.js"
+  },
+  "dependencies": {
+    "canvas": "^2.11.0"
+  }
+} 

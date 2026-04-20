@@ -1,0 +1,39 @@
+<!--pages/thinking/index.wxml-->
+<view class="container">
+  <!-- 对话区域 -->
+  <scroll-view class="chat-container" scroll-y scroll-into-view="{{scrollToMessage}}">
+    <view class="message-list">
+      <block wx:for="{{dialogues}}" wx:key="index">
+        <view class="message {{item.type}}" id="msg-{{index}}">
+          <view class="bubble">
+            {{item.content}}
+          </view>
+          <view class="time">{{item.time}}</view>
+        </view>
+      </block>
+    </view>
+  </scroll-view>
+
+  <!-- 输入区域 -->
+  <view class="input-container {{isLoading ? 'disabled' : ''}}">
+    <input class="input-box" 
+           type="text" 
+           value="{{userInput}}"
+           placeholder="请输入消息" 
+           bindinput="onInput"
+           disabled="{{isLoading}}"
+           confirm-type="send"
+           bindconfirm="sendMessage" />
+    <button class="send-btn" 
+            bindtap="sendMessage" 
+            disabled="{{isLoading || !userInput}}">
+      发送
+    </button>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading-mask" wx:if="{{isLoading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">AI思考中...</text>
+  </view>
+</view>

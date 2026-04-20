@@ -1,0 +1,317 @@
+/* pages/progress/index.wxss */
+.container {
+  padding: 30rpx;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+/* 头部样式 */
+.header {
+  margin-bottom: 40rpx;
+}
+
+.title {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+
+.subtitle {
+  font-size: 28rpx;
+  color: #666;
+}
+
+/* 能力曲线 */
+.curve-section {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 40rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.curve-container {
+  margin-top: 20rpx;
+}
+
+.ability-curve {
+  width: 100%;
+  height: 400rpx;
+  margin-bottom: 20rpx;
+}
+
+.curve-legend {
+  display: flex;
+  justify-content: space-around;
+  padding: 20rpx;
+  background: #f8f8f8;
+  border-radius: 16rpx;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+}
+
+.legend-color {
+  width: 30rpx;
+  height: 30rpx;
+  border-radius: 50%;
+}
+
+.legend-color.speed {
+  background: #FF9800;
+}
+
+.legend-color.path {
+  background: #4CAF50;
+}
+
+.legend-color.accuracy {
+  background: #2196F3;
+}
+
+/* 成就系统 */
+.achievement-section {
+  margin-bottom: 40rpx;
+}
+
+.achievement-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.achievement-card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  opacity: 0.7;
+}
+
+.achievement-card.unlocked {
+  opacity: 1;
+  border: 2rpx solid #FFD700;
+}
+
+.achievement-icon {
+  font-size: 40rpx;
+}
+
+.achievement-content {
+  flex: 1;
+}
+
+.achievement-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.achievement-desc {
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 12rpx;
+}
+
+.achievement-progress {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.progress-text {
+  font-size: 24rpx;
+  color: #2196F3;
+  min-width: 60rpx;
+}
+
+/* 复习日历 */
+.calendar-section {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 40rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.calendar-header {
+  margin-bottom: 20rpx;
+}
+
+.month-selector {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20rpx;
+}
+
+.month-btn {
+  font-size: 32rpx;
+  color: #2196F3;
+  padding: 10rpx;
+}
+
+.current-month {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.calendar-grid {
+  background: #f8f8f8;
+  border-radius: 16rpx;
+  padding: 20rpx;
+}
+
+.weekday-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  margin-bottom: 20rpx;
+  font-size: 24rpx;
+  color: #666;
+}
+
+.days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10rpx;
+}
+
+.day-cell {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 8rpx;
+  position: relative;
+}
+
+.day-cell.other-month {
+  opacity: 0.5;
+}
+
+.day-cell.has-plan::after {
+  content: '';
+  position: absolute;
+  bottom: 4rpx;
+  width: 8rpx;
+  height: 8rpx;
+  background: #2196F3;
+  border-radius: 50%;
+}
+
+.day-cell.today {
+  background: #E3F2FD;
+}
+
+.day-number {
+  font-size: 28rpx;
+  color: #333;
+}
+
+/* 当日计划 */
+.daily-plan {
+  margin-top: 30rpx;
+  background: #f8f8f8;
+  border-radius: 16rpx;
+  padding: 20rpx;
+}
+
+.plan-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.plan-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.plan-item {
+  background: #fff;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.plan-time {
+  font-size: 24rpx;
+  color: #2196F3;
+  min-width: 100rpx;
+}
+
+.plan-content {
+  flex: 1;
+}
+
+.plan-name {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.plan-desc {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.plan-status {
+  font-size: 24rpx;
+  color: #FF9800;
+}
+
+.plan-status.completed {
+  color: #4CAF50;
+}
+
+/* 加载状态 */
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.loading-icon {
+  width: 80rpx;
+  height: 80rpx;
+  border: 4rpx solid #f3f3f3;
+  border-top: 4rpx solid #2196F3;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20rpx;
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #666;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

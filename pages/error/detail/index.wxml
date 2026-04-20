@@ -1,0 +1,85 @@
+<!--pages/error/detail/index.wxml-->
+<view class="container">
+  <!-- 头部 -->
+  <view class="header">
+    <view class="title">错题详情</view>
+    <view class="subtitle">深入分析，查漏补缺</view>
+  </view>
+
+  <!-- 题目信息 -->
+  <view class="question-section">
+    <view class="section-title">原题</view>
+    <view class="question-content">{{question.content}}</view>
+    <view class="question-type">{{question.type}}</view>
+  </view>
+
+  <!-- 错误分析 -->
+  <view class="analysis-section">
+    <view class="section-title">错误分析</view>
+    <view class="analysis-content">
+      <view class="analysis-item">
+        <view class="item-label">错误类型</view>
+        <view class="item-value">{{analysis.errorType}}</view>
+      </view>
+      <view class="analysis-item">
+        <view class="item-label">错误原因</view>
+        <view class="item-value">{{analysis.errorReason}}</view>
+      </view>
+      <view class="analysis-item">
+        <view class="item-label">知识点</view>
+        <view class="item-value">{{analysis.knowledgePoints}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 解题过程 -->
+  <view class="solution-section">
+    <view class="section-title">解题过程</view>
+    <view class="solution-steps">
+      <view class="step-item" wx:for="{{solution.steps}}" wx:key="index">
+        <view class="step-number">{{index + 1}}</view>
+        <view class="step-content">{{item}}</view>
+      </view>
+    </view>
+    <view class="solution-result">
+      <view class="result-label">最终答案</view>
+      <view class="result-value">{{solution.result}}</view>
+    </view>
+  </view>
+
+  <!-- 复习记录 -->
+  <view class="review-section">
+    <view class="section-title">复习记录</view>
+    <view class="review-list">
+      <view class="review-item" wx:for="{{reviewHistory}}" wx:key="index">
+        <view class="review-header">
+          <view class="review-date">{{item.date}}</view>
+          <view class="review-status {{item.status}}">{{item.statusText}}</view>
+        </view>
+        <view class="review-content">
+          <view class="review-note">{{item.note}}</view>
+          <view class="review-mistakes" wx:if="{{item.mistakes.length > 0}}">
+            <view class="mistakes-title">易错点</view>
+            <view class="mistakes-list">
+              <view class="mistake-item" wx:for="{{item.mistakes}}" wx:key="index" wx:for-item="mistake">
+                {{mistake}}
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <button class="action-btn review" bindtap="startReview">开始复习</button>
+    <button class="action-btn note" bindtap="addNote">添加笔记</button>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading" wx:if="{{loading}}">
+    <view class="loading-icon"></view>
+    <view class="loading-text">加载中...</view>
+  </view>
+</view> 

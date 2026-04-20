@@ -1,0 +1,81 @@
+<!--pages/report/index.wxml-->
+<view class="container">
+  <view class="form-section">
+    <view class="form-item">
+      <text class="label">考试日期</text>
+      <picker mode="date" value="{{date}}" bindchange="onDateChange">
+        <view class="picker {{date ? '' : 'placeholder'}}">
+          {{date || '请选择日期'}}
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="label">考试科目</text>
+      <picker mode="selector" range="{{subjects}}" value="{{subjectIndex}}" bindchange="onSubjectChange">
+        <view class="picker {{subjectIndex >= 0 ? '' : 'placeholder'}}">
+          {{subjectIndex >= 0 ? subjects[subjectIndex] : '请选择科目'}}
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="label">考试成绩</text>
+      <input type="digit" 
+        class="input" 
+        placeholder="请输入分数" 
+        value="{{score}}"
+        bindinput="onScoreInput"
+      />
+    </view>
+
+    <view class="form-item">
+      <text class="label">班级排名</text>
+      <input type="number" 
+        class="input" 
+        placeholder="请输入排名" 
+        value="{{rank}}"
+        bindinput="onRankInput"
+      />
+    </view>
+
+    <view class="form-item">
+      <text class="label">班级总人数</text>
+      <input type="number" 
+        class="input" 
+        placeholder="请输入总人数" 
+        value="{{totalStudents}}"
+        bindinput="onTotalStudentsInput"
+      />
+    </view>
+
+    <button class="submit-btn" bindtap="generateReport" loading="{{isLoading}}">
+      生成报告
+    </button>
+  </view>
+
+  <view class="report-section" wx:if="{{showReport}}">
+    <view class="report-title">成绩分析报告</view>
+    
+    <view class="chart-section">
+      <view class="chart-title">成绩趋势</view>
+      <canvas canvas-id="scoreChart" class="chart"></canvas>
+    </view>
+
+    <view class="stats-section">
+      <view class="stats-item">
+        <text class="stats-label">得分率</text>
+        <text class="stats-value">{{scoreRate}}%</text>
+      </view>
+      <view class="stats-item">
+        <text class="stats-label">超过同学比例</text>
+        <text class="stats-value">{{rankRate}}%</text>
+      </view>
+    </view>
+
+    <view class="analysis-section">
+      <view class="section-title">分析与建议</view>
+      <view class="analysis-content">{{analysis}}</view>
+    </view>
+  </view>
+</view>

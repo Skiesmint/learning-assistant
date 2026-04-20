@@ -1,0 +1,28 @@
+<view class="container">
+  <view class="upload-section">
+    <view class="upload-box" bindtap="chooseImage">
+      <image wx:if="{{tempImagePath}}" src="{{tempImagePath}}" mode="aspectFit" class="preview-image"></image>
+      <view wx:else class="upload-placeholder">
+        <text class="icon">📷</text>
+        <text>点击上传图片</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="input-section">
+    <textarea 
+      class="question-input" 
+      placeholder="请输入您的问题（可选）" 
+      value="{{question}}"
+      bindinput="onQuestionInput"
+    ></textarea>
+    <button class="submit-btn" bindtap="submitQuestion" loading="{{isLoading}}">
+      获取答案
+    </button>
+  </view>
+
+  <view class="answer-section" wx:if="{{answer}}">
+    <view class="answer-title">AI回答：</view>
+    <view class="answer-content">{{answer}}</view>
+  </view>
+</view> 
